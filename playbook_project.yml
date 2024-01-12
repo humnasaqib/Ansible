@@ -1,0 +1,16 @@
+---
+- hosts: Target_Server
+  become: true
+  vars:
+    ansible_become_pass: humna
+  tasks:
+    - name: Install nginx
+      package:
+        name: nginx
+        state: present
+
+  handlers:
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started

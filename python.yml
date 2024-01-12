@@ -1,0 +1,11 @@
+---
+- name: Install Python
+  hosts: Target_Server
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Install Python
+      package:
+        name: python3
+        state: present

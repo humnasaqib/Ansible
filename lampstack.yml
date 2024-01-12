@@ -1,0 +1,45 @@
+---
+- name: install apache & php & mysql
+  hosts: Target_Server
+  become: true
+  become_user: root
+  gather_facts: true
+  tasks:
+    - name: Install apache2
+      package:
+        name: apache2
+        state: present
+
+    - name: Install apache2-php
+      package:
+        name: libapache2-mod-php
+        state: present
+
+    - name: Install php-cli
+      package:
+        name: php-cli
+        state: present
+
+    - name: Install mcrypt
+      package:
+        name: php-mcrypt
+        state: present
+
+    - name: Install php-gd
+      package:
+        name: php-gd
+        state: present
+
+    - name: Install php-mysql
+      package:
+        name: php-mysql
+        state: present
+    - name: Install epel-release (for php-mcrypt)
+      package:
+        name: epel-release
+        state: present
+    - name: Install mysql server
+      package:
+        name: mysql-server
+        state: present
+      when: "'php-mcrypt' not in ansible_facts.packages"
